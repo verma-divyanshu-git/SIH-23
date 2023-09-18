@@ -42,6 +42,10 @@ const home = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const logoutHandler =()=>{
+    authContext.onLogout();
+    handleClose();
+  }
   return (
     <>
       <div className="h-screen bg-white text-black h">
@@ -110,7 +114,7 @@ const home = () => {
                         className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                         aria-current="page"
                       >
-                        Sign-Up
+                        Signup
                       </a>
                     </Link>
                   )}
@@ -134,11 +138,13 @@ const home = () => {
                 <li>
                 <div>
       <Button
+        className="py-0"
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        
       >
         Dashboard
       </Button>
@@ -153,7 +159,7 @@ const home = () => {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={logoutHandler}>Logout</MenuItem>
       </Menu>
     </div>
                 </li>
