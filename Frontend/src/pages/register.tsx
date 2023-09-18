@@ -54,7 +54,7 @@ const register = () => {
               className="text-white bg-black hover:black hover:scale-[1.05] focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
               
             >
-              Add Details
+              Submit
             </button>
         </div>
       </div>
