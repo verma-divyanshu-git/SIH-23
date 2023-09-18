@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@iconscout/react-unicons": "^2.0.2",
     "@material-tailwind/react": "^2.1.2",

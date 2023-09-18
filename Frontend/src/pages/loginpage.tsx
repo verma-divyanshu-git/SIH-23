@@ -31,49 +31,53 @@ function isStrongPassword(password: string): boolean {
 const loginpage = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  
-  const submitHandler = async()=>{
-    if(isStrongPassword(password) && isValidEmail(email)){
-      const response = await fetch("http://localhost:5000/auth/login",{
-        method:"POST",
-        body:JSON.stringify({
-          emailAddress : email,
-          password:password
+
+  const submitHandler = async () => {
+    console.log("ran");
+    if (isStrongPassword(password) && isValidEmail(email)) {
+      const response = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          emailAddress: email,
+          password: password,
         }),
-        headers:{
-          'Content-Type':"application/json"
-        }
-      })
+        credentials:"include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      });
     }
-  }
+  };
   return (
     <>
-    <div className="bg-[url('/bg.png')] h-full w-full flex justify-center items-center">
-      <div className="flex justify-center items-center w-[1100px] h-[700px] bg-white p-12">
-        <div className="hidden lg:flex w-1/2 relative items-center justify-center">
-          <img
-            src="/login.png"
-            style={{ width: "500px", height: "500px" }}
-            alt=""
-          />
-        </div>
-        <div className="flex w-full h-screen items-center justify-center lg:w-1/2">
-          <div className=" bg-gray-50 px-20 py-24 border">
-            <div className="flex justify-center items-center">
-              <h1 className="text-2xl font-semibold text-black">
-                Sign in With
-                <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-white border border-gray-500">
-                  <FcGoogle />
-                </button>
-                <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-[#1450A3] text-white">
-                  <FaLinkedinIn />
-                </button>
-                <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-blue-400 text-white">
-                  <FaTwitter />
-                </button>
-              </h1>
-            </div>
-            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+      <div className="bg-[url('/bg.png')] h-full w-full flex justify-center items-center">
+        <div className="flex justify-center items-center w-[1100px] h-[700px] bg-white p-12">
+          <div className="hidden lg:flex w-1/2 relative items-center justify-center">
+            <img
+              src="/login.png"
+              style={{ width: "500px", height: "500px" }}
+              alt=""
+            />
+          </div>
+          <div className="flex w-full h-screen items-center justify-center lg:w-1/2">
+            <div className=" bg-gray-50 px-20 py-24 border">
+              <div className="flex justify-center items-center">
+                <h1 className="text-2xl font-semibold text-black">
+                  Sign in With
+                  <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-white border border-gray-500">
+                    <FcGoogle />
+                  </button>
+                  <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-[#1450A3] text-white">
+                    <FaLinkedinIn />
+                  </button>
+                  <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-blue-400 text-white">
+                    <FaTwitter />
+                  </button>
+                </h1>
+              </div>
+              <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
                 <p className="mx-4 mb-0 text-center font-semibold text-black">
                   Or
                 </p>
@@ -124,7 +128,10 @@ const loginpage = () => {
                 <a href="#!">Forgot password?</a>
               </div>
               <div className="flex justify-center items-center">
-                <button onClick={submitHandler} className="text-white py-3 px-8 flex justify-center items-center rounded-md border-2 hover:border-blue-700 border-transparent bg-blue-600 font-bold">
+                <button
+                  onClick={submitHandler}
+                  className="text-white py-3 px-8 flex justify-center items-center rounded-md border-2 hover:border-blue-700 border-transparent bg-blue-600 font-bold"
+                >
                   Login
                 </button>
               </div>
