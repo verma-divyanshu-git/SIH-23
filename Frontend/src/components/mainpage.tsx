@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import AuthContext from "../../context/context";
 import { useEffect } from "react";
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 const home = () => {
   const authContext = useContext(AuthContext);
   const user = authContext.user;
@@ -31,10 +34,18 @@ const home = () => {
     }
   }, []);
   const login = authContext.isLoggedIn;
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
-      <div className="h-screen bg-white text-black ">
-        <nav className=" bg-gray-200 border-gray-200 dark:bg-gray-900">
+      <div className="h-screen bg-white text-black h">
+        <nav className=" bg-gray-200 border-gray-200 dark:bg-gray-900 h-20">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a
               href="https://www.aicte-india.org/"
@@ -119,6 +130,32 @@ const home = () => {
                   >
                     Recordings
                   </a>
+                </li>
+                <li>
+                <div>
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        Dashboard
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
+    </div>
                 </li>
               </ul>
             </div>
