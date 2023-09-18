@@ -33,7 +33,7 @@ const loginpage = () => {
   const [email, setEmail] = useState("");
 
   const submitHandler = async () => {
-    console.log("ran");
+  
     if (isStrongPassword(password) && isValidEmail(email)) {
       const response = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
@@ -93,6 +93,7 @@ const loginpage = () => {
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
+                  
                   />
                 </div>
                 {/* <div className="mx-10 text-lg"> */}

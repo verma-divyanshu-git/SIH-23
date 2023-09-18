@@ -1,6 +1,7 @@
 require("dotenv").config();
 const router = require("express").Router();
 const bodyParser = require("body-parser");
+
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 const bcrypt = require("bcrypt");
