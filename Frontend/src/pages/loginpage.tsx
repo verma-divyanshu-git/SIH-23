@@ -57,7 +57,7 @@ const loginpage = () => {
   };
   return (
     <>
-      <div className="bg-[url('/bg.png')] h-full w-full flex justify-center items-center">
+      <div className="bg-[url('/bg.png')] h-screen w-full flex justify-center items-center">
         <div className="flex justify-center items-center w-[1100px] h-[700px] bg-white p-12">
           <div className="hidden lg:flex w-1/2 relative items-center justify-center">
             <img
