@@ -144,7 +144,7 @@ const loginpage = () => {
               <div className="flex justify-center items-center">
                 <p className="mb-0 mt-2 pt-1 text-sm font-semibold text-black">
                   Don't have an account?{" "}
-                  <a href="#!" className="text-red-700 ">
+                  <a href="/register" className="text-red-700 ">
                     Register
                   </a>
                 </p>
