@@ -5,6 +5,7 @@ import { FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { Input } from "@material-tailwind/react";
 import { Checkbox } from "@material-tailwind/react";
 import { FcGoogle } from "react-icons/fc";
+import { useRouter } from "next/router";
 function isValidEmail(email: string): boolean {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
@@ -31,7 +32,7 @@ function isStrongPassword(password: string): boolean {
 const loginpage = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
+  const router = useRouter();
   const submitHandler = async () => {
   
     if (isStrongPassword(password) && isValidEmail(email)) {
@@ -48,6 +49,10 @@ const loginpage = () => {
           "Access-Control-Allow-Credentials": "true",
         },
       });
+      const responseData = await response.json();
+      console.log(responseData);
+      localStorage.setItem('token',responseData.token);
+      router.push('/mainpage');
     }
   };
   return (
