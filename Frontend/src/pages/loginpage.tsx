@@ -1,65 +1,111 @@
-import React from "react";
+import React, { useState } from "react";
 // import 'tw-elements';
 import { TEInput, TERipple } from "tw-elements";
 import { FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { Input } from "@material-tailwind/react";
 import { Checkbox } from "@material-tailwind/react";
 import { FcGoogle } from "react-icons/fc";
+function isValidEmail(email: string): boolean {
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+  return emailPattern.test(email);
+}
+
+function isStrongPassword(password: string): boolean {
+  // Regular expressions to check for specific conditions
+  const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\]/.test(password);
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+
+  // Check all conditions
+  return (
+    hasSpecialChar &&
+    hasUpperCase &&
+    hasLowerCase &&
+    hasNumber &&
+    password.length >= 8
+  );
+}
+
 const loginpage = () => {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  
+  const submitHandler = async()=>{
+    if(isStrongPassword(password) && isValidEmail(email)){
+      const response = await fetch("http://localhost:5000/auth/login",{
+        method:"POST",
+        body:JSON.stringify({
+          emailAddress : email,
+          password:password
+        }),
+        headers:{
+          'Content-Type':"application/json"
+        }
+      })
+    }
+  }
   return (
     <>
-    <div className="bg-[url('/bg.png')] h-screen w-full flex justify-center items-center">
-      <div className="flex justify-center items-center w-[1100px] h-[700px] bg-white p-12">
-        <div className="hidden lg:flex w-1/2 relative items-center justify-center">
-          <img
-            src="/login.png"
-            style={{ width: "500px", height: "500px" }}
-            alt=""
-          />
-        </div>
-        <div className="flex w-full h-screen items-center justify-center lg:w-1/2">
-          <div className=" bg-gray-50 px-20 py-24 border">
-            <div className="flex justify-center items-center">
-              <h1 className="text-2xl font-semibold text-black">
-                Sign in With
-                <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-white border border-gray-500">
-                  <FcGoogle />
-                </button>
-                <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-[#1450A3] text-white">
-                  <FaLinkedinIn />
-                </button>
-                <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-blue-400 text-white">
-                  <FaTwitter />
-                </button>
-              </h1>
-            </div>
-            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+      <div className="bg-[url('/bg.png')] h-screen w-full flex justify-center items-center">
+        <div className="flex justify-center items-center w-[1100px] h-[700px] bg-white p-12">
+          <div className="hidden lg:flex w-1/2 relative items-center justify-center">
+            <img
+              src="/login.png"
+              style={{ width: "500px", height: "500px" }}
+              alt=""
+            />
+          </div>
+          <div className="flex w-full h-screen items-center justify-center lg:w-1/2">
+            <div className=" bg-gray-50 px-20 py-24 border">
+              <div className="flex justify-center items-center">
+                <h1 className="text-2xl font-semibold text-black">
+                  Sign in With
+                  <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-white border border-gray-500">
+                    <FcGoogle />
+                  </button>
+                  <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-[#1450A3] text-white">
+                    <FaLinkedinIn />
+                  </button>
+                  <button className="ml-2 rounded-full p-2 hover:scale-[1.05] bg-blue-400 text-white">
+                    <FaTwitter />
+                  </button>
+                </h1>
+              </div>
+              <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
                 <p className="mx-4 mb-0 text-center font-semibold text-black">
                   Or
                 </p>
               </div>
 
-            <div className="flex flex-col gap-8 items-center">
-              <div className="w-72 mt-2">
-                <Input
-                  type="email"
-                  className="text-black p-5"
-                  crossOrigin=""
-                  placeholder="Email Address"
-                />
+              <div className="flex flex-col gap-8 items-center">
+                <div className="w-72 mt-2">
+                  <Input
+                    type="email"
+                    className="text-black p-5"
+                    crossOrigin=""
+                    placeholder="Email Address"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  />
+                </div>
+                {/* <div className="mx-10 text-lg"> */}
+                <div className="w-72">
+                  <Input
+                    type="email"
+                    className="text-black p-5"
+                    crossOrigin=""
+                    placeholder="Password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                </div>
+                {/* </div> */}
               </div>
-              {/* <div className="mx-10 text-lg"> */}
-              <div className="w-72">
-                <Input
-                  type="email"
-                  className="text-black p-5"
-                  crossOrigin=""
-                  placeholder="Password"
-                />
-              </div>
-              {/* </div> */}
-            </div>
-            <div className="mt-6 mb-6 flex items-center justify-between text-black">
+              <div className="mt-6 mb-6 flex items-center justify-between text-black">
                 {/* <!-- Remember me checkbox --> */}
                 <div className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
                   {/* <input
@@ -78,25 +124,21 @@ const loginpage = () => {
                 <a href="#!">Forgot password?</a>
               </div>
               <div className="flex justify-center items-center">
-              <button
-                    className="text-white py-3 px-8 flex justify-center items-center rounded-md border-2 hover:border-blue-700 border-transparent bg-blue-600 font-bold"
-                  >
-                    Login
-                  </button>
-                  </div>
-                  <div className="flex justify-center items-center">
-                  <p className="mb-0 mt-2 pt-1 text-sm font-semibold text-black">
+                <button onClick={submitHandler} className="text-white py-3 px-8 flex justify-center items-center rounded-md border-2 hover:border-blue-700 border-transparent bg-blue-600 font-bold">
+                  Login
+                </button>
+              </div>
+              <div className="flex justify-center items-center">
+                <p className="mb-0 mt-2 pt-1 text-sm font-semibold text-black">
                   Don't have an account?{" "}
-                  <a href="#!"
-                    className="text-red-700 "
-                  >
+                  <a href="#!" className="text-red-700 ">
                     Register
                   </a>
                 </p>
-                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </>
   );
