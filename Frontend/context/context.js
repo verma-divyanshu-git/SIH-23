@@ -7,8 +7,9 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const  islogin = localStorage.getItem('token')
+  const [isLoggedIn, setIsLoggedIn] = useState(islogin);
+  const [user,setUser] = useState(null);
   
 
   const logoutHandler = () => {
@@ -16,7 +17,9 @@ export const AuthContextProvider = (props) => {
     setIsLoggedIn(false);
   };
 const loginHandler=()=>{
+    console.log("ran");
     setIsLoggedIn(true);
+    console.log(isLoggedIn);
 }
   
 

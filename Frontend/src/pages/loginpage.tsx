@@ -54,7 +54,7 @@ const loginpage = () => {
       const responseData = await response.json();
       console.log(responseData);
       localStorage.setItem('token',responseData.token);
-      router.push('/mainpage');
+      router.push('/');
       authContext.onLogin();
     }
   };

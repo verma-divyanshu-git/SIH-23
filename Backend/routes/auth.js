@@ -31,6 +31,7 @@ function isStrongPassword(password) {
 }
 
 router.post("/register", async (req, res) => {
+  console.log(req.body)
   try {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
