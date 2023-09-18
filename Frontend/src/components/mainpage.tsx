@@ -1,55 +1,129 @@
-import React, { useContext } from 'react';
-import Link from 'next/link';
-import AuthContext from '../../context/context';
+import React, { useContext } from "react";
+import Link from "next/link";
+import AuthContext from "../../context/context";
+import { useEffect } from "react";
 const home = () => {
-    const authContext = useContext(AuthContext);
-    const login = authContext.isLoggedIn;
-    return ( 
-        <>
-        <div className='h-screen bg-white text-black '>
+  const authContext = useContext(AuthContext);
+  const user = authContext.user;
+  useEffect(() => {
+    if (!user && localStorage.getItem("token")) {
+      fetch("http://localhost:5000/auth/user", {
+        method: "POST",
+        body: JSON.stringify({
+          token: localStorage.getItem("token"),
+        }),
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          authContext.setUser(data.user);
+          if(data.user){
+            authContext.onLogin();
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }, []);
+  const login = authContext.isLoggedIn;
+  return (
+    <>
+      <div className="h-screen bg-white text-black ">
         <nav className=" bg-gray-200 border-gray-200 dark:bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://www.aicte-india.org/" className="flex items-center">
-                <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/All_India_Council_for_Technical_Education_logo.png" className="h-8 mr-3" alt="Flowbite Logo" />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AICTE</span>
+          <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a
+              href="https://www.aicte-india.org/"
+              className="flex items-center"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/e/eb/All_India_Council_for_Technical_Education_logo.png"
+                className="h-8 mr-3"
+                alt="Flowbite Logo"
+              />
+              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                AICTE
+              </span>
             </a>
-            <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-                <span className="sr-only">Open main menu</span>
-                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                </svg>
+            <button
+              data-collapse-toggle="navbar-default"
+              type="button"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="navbar-default"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
             </button>
-            <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <div
+              className="hidden w-full md:block md:w-auto"
+              id="navbar-default"
+            >
+              <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                {!login &&<Link legacyBehavior href="/loginpage"><a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Login/Sign-Up</a></Link>}
+                  {!login && (
+                    <Link legacyBehavior href="/loginpage">
+                      <a
+                        href="#"
+                        className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                        aria-current="page"
+                      >
+                        Login/Sign-Up
+                      </a>
+                    </Link>
+                  )}
                 </li>
                 <li>
-                <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Chat</a>
+                  <a
+                    href="#"
+                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    Chat
+                  </a>
                 </li>
                 <li>
-                <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Recordings</a>
+                  <a
+                    href="#"
+                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    Recordings
+                  </a>
                 </li>
-            </ul>
+              </ul>
             </div>
-
-        </div>
+          </div>
         </nav>
-        <div className='flex justify-center mt-16'>
-            <div className='flex justify-center items-center'>
-            <div className='mt-10 space-y-4'>
-            <p className='text-6xl'>
-                Premium video meetings.
-            </p>
-            
-            <p className='text-4xl'>
-                Now free for anyone.
-            </p>
-            <br></br>
-            <p>
-            We re-engineered the service we built for secure business <br></br> meetings, Google Meet, to make it free and available for all.
-            </p>
-            {/* <p>
+        <div className="flex justify-center mt-16">
+          <div className="flex justify-center items-center">
+            <div className="mt-10 space-y-4">
+              <p className="text-6xl">Premium video meetings.</p>
+
+              <p className="text-4xl">Now free for anyone.</p>
+              <br></br>
+              <p>
+                We re-engineered the service we built for secure business{" "}
+                <br></br> meetings, Google Meet, to make it free and available
+                for all.
+              </p>
+              {/* <p>
             We re-engineered the service we built for secure business <br></br> meetings, Google Meet, to make it free and available for all.
             </p>
             <p>
@@ -58,39 +132,51 @@ const home = () => {
             <p>
             We re-engineered the service we built for secure business <br></br> meetings, Google Meet, to make it free and available for all.
             </p> */}
-            <br></br>
-            <button type="button" className="mt-2 inline-flex items-center p-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            🎥 Instant meeting
-            </button>
-            <button type="button" className="ml-3 text-white bg-[#050708] hover:bg-[#050708]/80 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm p-4 text-center inline-flex items-center dark:hover:bg-[#050708]/40 dark:focus:ring-gray-600 mr-2 mb-2">
-            ⏳ Schedule a meeting
-            </button>
+              <br></br>
+              <button
+                type="button"
+                className="mt-2 inline-flex items-center p-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                🎥 Instant meeting
+              </button>
+              <button
+                type="button"
+                className="ml-3 text-white bg-[#050708] hover:bg-[#050708]/80 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm p-4 text-center inline-flex items-center dark:hover:bg-[#050708]/40 dark:focus:ring-gray-600 mr-2 mb-2"
+              >
+                ⏳ Schedule a meeting
+              </button>
             </div>
+          </div>
+          <div className="flex justify-center items-center">
+            <div className="mt-10">
+              <img
+                className="flex"
+                src="main_bg.gif"
+                alt="Get a link you can share"
+                style={{ height: "500px", width: "600px" }}
+                role="img"
+                data-atf="true"
+                data-iml="2506.7000000029802"
+              ></img>
             </div>
-            <div className='flex justify-center items-center'>
-            <div className='mt-10'>
-            <img className="flex" src="main_bg.gif" alt="Get a link you can share" style={{height:'500px',width:'600px'}} role="img" data-atf="true" data-iml="2506.7000000029802"></img> 
-            </div>
-            </div>
+          </div>
         </div>
-        </div>
-        </>
- );
-}
- 
-export default home;
+      </div>
+    </>
+  );
+};
 
+export default home;
 
 // import React, { useEffect, useRef } from 'react';
 // import LottiePlayer from "@lottiefiles/react-lottie-player";
 // import Lottie from "lottie-react";
-// import officeAnimation from '../office.json'; 
+// import officeAnimation from '../office.json';
 // // import Link from "next/link";
 // // import Logo from "./Logo";
 // // import Button from "./Button";
 
 // const mainpage = () => {
-  
 
 //   // useEffect(() => {
 //   //   lottie.loadAnimation({
@@ -106,12 +192,11 @@ export default home;
 //     height: '200px', // Set your desired height
 //     background:'white',
 //   };
-  
-  
+
 //   return (
 //     <>
 //         <div>
-        
+
 //             <nav className="bg-gray-200 border-gray-200 ">
 //             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 //                 <a href="https://flowbite.com/" className="flex items-center">
@@ -179,10 +264,10 @@ export default home;
 //             </a>
 //             </div>
 //         </div>
-        
+
 //         </section>
 //         </div>
-        
+
 //     </>
 //   )
 // }
