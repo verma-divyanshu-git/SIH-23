@@ -18,7 +18,7 @@ const home = () => {
             <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                <a href="#" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Login/Sign-Up</a>
+                <a href="/loginpage" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Login/Sign-Up</a>
                 </li>
                 <li>
                 <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Chat</a>
@@ -31,20 +31,21 @@ const home = () => {
 
         </div>
         </nav>
-        <div className='mt-20 ml-20 flex justify-around'>
-            <div className='mt-10'>
-            <p className='text-4xl ' >
+        <div className='flex justify-center mt-16'>
+            <div className='flex justify-center items-center'>
+            <div className='mt-10 space-y-4'>
+            <p className='text-6xl'>
                 Premium video meetings.
             </p>
             
-            <p className='text-3xl'>
+            <p className='text-4xl'>
                 Now free for anyone.
             </p>
             <br></br>
             <p>
             We re-engineered the service we built for secure business <br></br> meetings, Google Meet, to make it free and available for all.
             </p>
-            <p>
+            {/* <p>
             We re-engineered the service we built for secure business <br></br> meetings, Google Meet, to make it free and available for all.
             </p>
             <p>
@@ -52,17 +53,20 @@ const home = () => {
             </p>
             <p>
             We re-engineered the service we built for secure business <br></br> meetings, Google Meet, to make it free and available for all.
-            </p>
+            </p> */}
             <br></br>
-            <button type="button" className="mt-2 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button type="button" className="mt-2 inline-flex items-center p-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             🎥 Instant meeting
             </button>
-            <button type="button" className="ml-3 text-white bg-[#050708] hover:bg-[#050708]/80 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#050708]/40 dark:focus:ring-gray-600 mr-2 mb-2">
+            <button type="button" className="ml-3 text-white bg-[#050708] hover:bg-[#050708]/80 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm p-4 text-center inline-flex items-center dark:hover:bg-[#050708]/40 dark:focus:ring-gray-600 mr-2 mb-2">
             ⏳ Schedule a meeting
             </button>
             </div>
+            </div>
+            <div className='flex justify-center items-center'>
             <div className='mt-10'>
-            <img className="flex" src="https://explore.zoom.us/docs/image/qgr-report/qualtrics-hero.gif" alt="Get a link you can share" style={{height:'300px',width:'400px'}} role="img" data-atf="true" data-iml="2506.7000000029802"></img> 
+            <img className="flex" src="main_bg.gif" alt="Get a link you can share" style={{height:'500px',width:'600px'}} role="img" data-atf="true" data-iml="2506.7000000029802"></img> 
+            </div>
             </div>
         </div>
         </div>
