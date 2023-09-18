@@ -30,7 +30,28 @@ function isStrongPassword(password) {
   );
 }
 
+router.post('/user',async(req,res)=>{
+  try{
+    var decoded = jwt.verify(req.body.token, process.env.SECRET);
+    // console.log(decoded);
+    const email = decoded.data;
+    console.log(email);
+    const user = await User.findOne({emailAddress:email});
+    if(user){
+      res.status(201).json({user:user});
+    }
+    else{
+    res.status(401).json({message:"Internal Server Error!"})
+      
+    }
+  }
+  catch(err){
+    console.log(err);
+    res.status(401).json({message:"Internal Server Error!"})
+  }
+})
 router.post("/register", async (req, res) => {
+  console.log(req.body)
   try {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
