@@ -34,7 +34,7 @@ const loginpage = () => {
   const [email, setEmail] = useState("");
   const router = useRouter();
   const submitHandler = async () => {
-  
+    console.log("ran");
     if (isStrongPassword(password) && isValidEmail(email)) {
       const response = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
