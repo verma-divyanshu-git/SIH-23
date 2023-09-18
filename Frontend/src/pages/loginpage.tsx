@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 // import 'tw-elements';
 import { TEInput, TERipple } from "tw-elements";
 import { FaLinkedinIn, FaTwitter } from "react-icons/fa";
@@ -6,6 +6,7 @@ import { Input } from "@material-tailwind/react";
 import { Checkbox } from "@material-tailwind/react";
 import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/router";
+import AuthContext from "../../context/context";
 function isValidEmail(email: string): boolean {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
@@ -33,8 +34,9 @@ const loginpage = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const router = useRouter();
+  const authContext = useContext(AuthContext);
   const submitHandler = async () => {
-    console.log("ran");
+  
     if (isStrongPassword(password) && isValidEmail(email)) {
       const response = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
@@ -53,6 +55,7 @@ const loginpage = () => {
       console.log(responseData);
       localStorage.setItem('token',responseData.token);
       router.push('/mainpage');
+      authContext.onLogin();
     }
   };
   return (
