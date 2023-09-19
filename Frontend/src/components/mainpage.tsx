@@ -167,10 +167,10 @@ const home = () => {
             </div>
           </div>
         </nav>
-        <div className="flex justify-center mt-16">
+        {/* <div className="flex justify-center mt-16">
           <div className="flex justify-center items-center">
             <div className="mt-10 space-y-4">
-              <p className="text-6xl">Premium video meetings.</p>
+              <p className="text-6xl">Connect and Collaborate</p>
 
               <p className="text-4xl">Now free for anyone.</p>
               <br></br>
@@ -179,15 +179,7 @@ const home = () => {
                 <br></br> meetings, Google Meet, to make it free and available
                 for all.
               </p>
-              {/* <p>
-            We re-engineered the service we built for secure business <br></br> meetings, Google Meet, to make it free and available for all.
-            </p>
-            <p>
-            We re-engineered the service we built for secure business <br></br> meetings, Google Meet, to make it free and available for all.
-            </p>
-            <p>
-            We re-engineered the service we built for secure business <br></br> meetings, Google Meet, to make it free and available for all.
-            </p> */}
+              
               <br></br>
               <button
                 type="button"
@@ -216,7 +208,32 @@ const home = () => {
               ></img>
             </div>
           </div>
-        </div>
+        </div> */}
+
+<div className='mt-20 bg-white flex justify-between items-center'>
+    {/* <div className="flex justify-center items-center"> */}
+        {/* <div className='shadow-2xl ml-0 mr-0 mb-32 rounded-3xl hover:scale-[1.01] duration-500 p-10'> */}
+          {/* <div className="flex justify-center items-center"> */}
+            <div className="flex flex-col justify-center w-1/2">
+              <div className="font-bold ml-20 text-6xl">
+              Connect and Collaborate
+              </div>
+              <p className='text-black ml-20 text-xl m-auto text-justify mt-12'>Experience the ease and simplicity of seamless online interaction, connecting you with others effortlessly and enhancing your collaboration.</p>
+              <div className="m-6 mt-12 ml-20 text-lg space-x-6">
+                <Link href="/meetingPage" className="bg-blue-700 text-white p-4 rounded-md hover:scale-[1.10]">Instant Meeting </Link>
+                <Link href="" className="bg-blue-700 text-white p-4 rounded-md hover:scale-[1.10]">Schedule a Meeting</Link>
+              </div>
+            </div>
+            <div className='mr-8 w-1/2 flex justify-center'>
+              <img
+                src="main_bg.gif"
+                alt=""
+                style={{ width: "600px", height: "500px" }}
+              />
+            </div>
+        {/* </div> */}
+      </div>
+      {/* </div> */}
       </div>
     </>
   );
